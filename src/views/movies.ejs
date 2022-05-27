@@ -1,0 +1,53 @@
+<%- include("_header-auth") -%>
+
+<div class="columns is-mobile is-centered mt-5">
+  <div class="column is-11">
+    <h1 class="title is-3">Movies List</h1>
+    <div class="tile is-ancestor">
+      <div class="tile">
+        <div class="tile is-parent is-10">
+          <% for(const movie of movies) { %>
+          <div class="tile is-child">
+            <div class="card m-5">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="<%= movie.image_path %>" alt="Placeholder image" />
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4"><%= movie.title %></p>
+                    <p class="subtitle is-6">
+                      <% const releaseDate = new Date(movie.release_date); const
+                      date = `${releaseDate.getFullYear()}/${
+                      releaseDate.getMonth() + 1 }/${releaseDate.getDate()}` %>
+                      Release Date : <%= date %>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <%= movie.overview %>
+                  <strong>Rate : <%= movie.vote %></strong>
+                </div>
+
+                <footer class="card-footer">
+                  <a href="#" class="card-footer-item">Add to your list</a>
+                  <a
+                    href="/reviews/create/<%= movie.id %>"
+                    class="card-footer-item"
+                    >Review</a
+                  >
+                </footer>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("_footer") -%>

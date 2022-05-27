@@ -31,11 +31,12 @@ CREATE TABLE likes(
 INSERT INTO members(name, email, password, favorite_movies)
 VALUES
 ('alice', 'alice@test.com', 'alicebeck', '{Frozen}'),
-('josh', 'josh@test.com', 'joshparker', '{Spider-Man}');
+('josh', 'josh@test.com', 'joshparker', '{SPIDER-MAN}');
 
 INSERT INTO movies(image_path, title, overview, release_date, vote)
 VALUES
-('', 'Frozen', 'The film depicts a princess who sets off on a journey alongside an iceman, his reindeer, and a snowman to find her estranged sister, whose icy powers have inadvertently trapped their kingdom in eternal winter.', '2013-11-27', 3.8);
+('https://i.pinimg.com/originals/4f/e0/5c/4fe05c0a2d170a2261e6501618f913bd.png', 'Frozen', 'The film depicts a princess who sets off on a journey alongside an iceman, his reindeer, and a snowman to find her estranged sister, whose icy powers have inadvertently trapped their kingdom in eternal winter.', '2013-11-27', 3.8),
+('https://wallpaperaccess.com/full/35386.jpg', 'SPIDER-MAN', '"Spider-Man" centers on student Peter Parker (Tobey Maguire) who, after being bitten by a genetically-altered spider, gains superhuman strength and the spider-like ability to cling to any surface. He vows to use his abilities to fight crime, coming to understand the words of his beloved Uncle Ben: "With great power comes great responsibility."', '2002-05-03', 4.1);
 
 INSERT INTO reviews(reviewer, movie, rate, review)
 VALUES

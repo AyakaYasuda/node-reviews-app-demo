@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const pool = require('../db');
-const res = require('express/lib/response');
 
 const router = Router();
 
@@ -44,7 +43,11 @@ router.post('/login', (request, response, next) => {
 
   pool.query('SELECT * FROM members WHERE email=($1)', [email], (err, res) => {
     if (err) return next(err);
-    if (bcrypt.compareSync(password, res.rows[0].password)) {
+    
+    if (
+      res.rows.length > 0 &&
+      bcrypt.compareSync(password, res.rows[0].password)
+    ) {
       request.session.email = email;
       response.redirect('/members/my-page');
     } else {
