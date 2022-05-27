@@ -63,11 +63,11 @@ router.get('/create/:id', (request, response, next) => {
 
 router.post('/create/:id', (request, response, next) => {
   const { uid } = request.session;
-  const { reviewer, movie, rate, review } = request.body;
+  const { reviewer, movie, rate, review_comment } = request.body;
 
   pool.query(
-    'INSERT INTO reviews(reviewer, movie, rate, review) VALUES($1, $2, $3, $4)',
-    [reviewer, movie, rate, review],
+    'INSERT INTO reviews(reviewer, movie, rate, review_comment) VALUES($1, $2, $3, $4)',
+    [reviewer, movie, rate, review_comment],
     (err, res) => {
       if (err) return next(err);
 
@@ -80,18 +80,18 @@ router.post('/create/:id', (request, response, next) => {
   );
 });
 
-router.get('/edit/:id', (request, response, next) => {
-  const { id } = request.params;
+router.get('/edit/:rid', (request, response, next) => {
+  const { rid } = request.params;
   const { email, uid } = request.session;
 
-  pool.query('SELECT * FROM reviews WHERE id=($1)', [id], (err, res) => {
+  pool.query('SELECT * FROM reviews WHERE rid=($1)', [rid], (err, res) => {
     if (err) return next(err);
 
     const review = res.rows[0];
 
     if (email && uid) {
       response.render('edit-review', {
-        id: id,
+        rid: rid,
         review: review,
         email: email,
         uid: uid,
@@ -102,11 +102,11 @@ router.get('/edit/:id', (request, response, next) => {
   });
 });
 
-router.put('/edit/:id', (request, response, next) => {
+router.put('/edit/:rid', (request, response, next) => {
   const { uid } = request.session;
-  const { id } = request.params;
+  const { rid } = request.params;
 
-  const keys = ['rate', 'review'];
+  const keys = ['rate', 'review_comment'];
   let fields = [];
 
   keys.forEach((key) => {
@@ -115,8 +115,8 @@ router.put('/edit/:id', (request, response, next) => {
 
   fields.forEach((field, index) => {
     pool.query(
-      `UPDATE reviews SET ${field}=($1) WHERE id=($2)`,
-      [request.body[field], id],
+      `UPDATE reviews SET ${field}=($1) WHERE rid=($2)`,
+      [request.body[field], rid],
       (err, res) => {
         if (err) return next(err);
 
@@ -132,11 +132,11 @@ router.put('/edit/:id', (request, response, next) => {
   });
 });
 
-router.delete('/delete/:id', (request, response, next) => {
+router.delete('/delete/:rid', (request, response, next) => {
   const { uid } = request.session;
-  const { id } = request.params;
+  const { rid } = request.params;
 
-  pool.query('DELETE FROM reviews WHERE id=($1)', [id], (err, res) => {
+  pool.query('DELETE FROM reviews WHERE rid=($1)', [rid], (err, res) => {
     if (err) return next(err);
 
     if (uid) {

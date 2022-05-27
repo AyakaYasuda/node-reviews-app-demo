@@ -7,7 +7,7 @@ const router = Router();
 router.get('/register', (request, response) => {
   let sess = request.session;
   if (sess.email) {
-    response.redirect('/members/my-page');
+    response.redirect('/members/feed');
   }
   response.render('register');
 });
@@ -32,7 +32,7 @@ router.get('/login', (request, response) => {
   let sess = request.session;
 
   if (sess.email) {
-    return response.redirect('/members/my-page');
+    return response.redirect('/members/feed');
   }
 
   response.render('login');
@@ -50,22 +50,27 @@ router.post('/login', (request, response, next) => {
     ) {
       request.session.email = email;
       request.session.uid = res.rows[0].id;
-      response.redirect('/members/my-page');
+      response.redirect('/members/feed');
     } else {
       response.end('Invalid credentials');
     }
   });
 });
 
-router.get('/my-page', (request, response, next) => {
+router.get('/feed', (request, response, next) => {
   const { email, uid } = request.session;
 
-  if (email) {
-    response.render('my-page', { email: email, uid: uid });
-    response.end();
-  } else {
-    response.end('Please log in first');
-  }
+  pool.query('SELECT * FROM reviews ORDER BY rid ASC', (err, res) => {
+    if (err) return next();
+
+    const reviews = res.rows;
+
+    if (email && uid) {
+      response.render('feed', { email: email, uid: uid, reviews: reviews });
+    } else {
+      response.end('Please log in first');
+    }
+  });
 });
 
 router.get('/logout', (request, response, next) => {

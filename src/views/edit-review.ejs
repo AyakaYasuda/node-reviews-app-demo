@@ -7,7 +7,7 @@
     <h1 class="title is-3">Rate & Review</h1>
     <h3 class="subtitle is-4">What did you think about this movie?</h3>
 
-    <form action="/reviews/edit/<%= id %>?_method=PUT" method="post">
+    <form action="/reviews/edit/<%= rid %>?_method=PUT" method="post">
       <div class="field">
         <label class="label">Rate</label>
         <div class="control">
@@ -28,8 +28,8 @@
           <textarea
             name="review"
             class="textarea"
-            placeholder="<%= review.review %>"
-            value="<%= review.review %>"
+            placeholder="<%= review.review_comment %>"
+            value="<%= review.review_comment %>"
           ></textarea>
         </div>
       </div>

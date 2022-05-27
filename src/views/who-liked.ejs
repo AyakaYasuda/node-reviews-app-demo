@@ -1,0 +1,14 @@
+<%- include("_header-auth") -%>
+
+<div class="columns is-mobile is-centered mt-5">
+  <div class="column is-5">
+    <h1 class="title is-3">Members who liked this review</h1>
+    <% for(const liker of likers) { %>
+    <div class="box">
+      <a href="/likes/member/<%= liker.id %>"><%= liker.member %></a>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include("_footer") -%>

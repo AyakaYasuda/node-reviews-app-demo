@@ -2,7 +2,7 @@
 
 <div class="columns is-mobile is-centered mt-5">
   <div class="column is-10">
-    <h1 class="title is-3">My Reviews</h1>
+    <h1 class="title is-3">Reviews <%= reviews[0].name %> liked</h1>
     <div class="tile is-ancestor">
       <div class="tile">
         <div class="tile is-parent">
@@ -19,21 +19,6 @@
                   <br />
                   <p>By <%= review.reviewer %></p>
                 </div>
-              </div>
-              <div class="is-flex is-justify-content-end">
-                <a href="/reviews/edit/<%= review.rid %>">
-                  <button type="submit" class="button is-primary m-2">
-                    Edit
-                  </button></a
-                >
-                <form
-                  action="/reviews/delete/<%= review.rid %>?_method=DELETE"
-                  method="post"
-                >
-                  <button type="submit" class="button is-primary is-light m-2">
-                    Delete
-                  </button>
-                </form>
               </div>
             </div>
           </div>
