@@ -1,0 +1,52 @@
+<%- include("_header-auth") -%>
+
+<div class="columns is-mobile is-centered mt-5">
+  <div
+    class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
+  >
+    <h1 class="title is-3">Rate & Review</h1>
+    <h3 class="subtitle is-4">What did you think about this movie?</h3>
+
+    <form action="/reviews/create/<%= id %>" method="post">
+      <div class="field">
+        <!-- <label class="label">Name</label> -->
+        <div class="control">
+          <input name="reviewer" class="input is-hidden" type="text" placeholder="Text input" value="<%= reviewer %>" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Movie</label>
+        <div class="control">
+          <input name="movie" class="input" type="text" value="<%= movie.title %>" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Rate</label>
+        <div class="control">
+          <input name="rate" class="input" type="number" max="5" step="0.1" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Review</label>
+        <div class="control">
+          <textarea name="review" class="textarea" placeholder="What did you think?"></textarea>
+        </div>
+      </div>
+
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button is-primary is-light">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include("_footer") -%>

@@ -50,15 +50,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="/movies"> Movies </a>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link"> Reviews </a>
-
-              <div class="navbar-dropdown">
-                <a class="navbar-item"> Your reviews </a>
-                <a class="navbar-item"> Create a new review </a>
-              </div>
-            </div>
+            <a class="navbar-item" href="/reviews/<%= uid %>"> My Reviews </a>
           </div>
 
           <div class="navbar-end">
@@ -73,4 +65,6 @@
           </div>
         </div>
       </nav>
-    
+    </main>
+  </body>
+</html>

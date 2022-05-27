@@ -43,12 +43,13 @@ router.post('/login', (request, response, next) => {
 
   pool.query('SELECT * FROM members WHERE email=($1)', [email], (err, res) => {
     if (err) return next(err);
-    
+
     if (
       res.rows.length > 0 &&
       bcrypt.compareSync(password, res.rows[0].password)
     ) {
       request.session.email = email;
+      request.session.uid = res.rows[0].id;
       response.redirect('/members/my-page');
     } else {
       response.end('Invalid credentials');
@@ -57,10 +58,10 @@ router.post('/login', (request, response, next) => {
 });
 
 router.get('/my-page', (request, response, next) => {
-  const { email } = request.session;
+  const { email, uid } = request.session;
 
   if (email) {
-    response.render('my-page', { email: email });
+    response.render('my-page', { email: email, uid: uid });
     response.end();
   } else {
     response.end('Please log in first');

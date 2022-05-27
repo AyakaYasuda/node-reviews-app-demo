@@ -4,17 +4,17 @@ const pool = require('../db');
 const router = Router();
 
 router.get('/', (request, response, next) => {
-  const { email } = request.session;
+  const { email, uid } = request.session;
 
   pool.query('SELECT * FROM movies ORDER BY id ASC', (err, res) => {
     if (err) return next(err);
 
-    if (email) {
+    if (email && uid) {
       response.render('movies', {
         movies: res.rows,
         email: email,
+        uid: uid,
       });
-      response.end();
     } else {
       response.end('Please log in first');
     }

@@ -1,0 +1,45 @@
+<%- include("_header-auth") -%>
+
+<div class="columns is-mobile is-centered mt-5">
+  <div class="column is-10">
+    <h1 class="title is-3">Your Reviews</h1>
+    <div class="tile is-ancestor">
+      <div class="tile">
+        <div class="tile is-parent">
+          <% for(const review of reviews) { %>
+          <div class="tile is-child">
+            <div class="card m-4">
+              <header class="card-header">
+                <p class="card-header-title"><%= review.movie %></p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <p><%= review.review %></p>
+                  <p>By <%= review.reviewer %></p>
+                </div>
+              </div>
+              <div class="is-flex is-justify-content-end">
+                <a href="/reviews/edit/<%= review.id %>">
+                  <button type="submit" class="button is-primary m-2">
+                    Edit
+                  </button></a
+                >
+                <form
+                  action="/reviews/delete/<%= review.id %>?_method=DELETE"
+                  method="post"
+                >
+                  <button type="submit" class="button is-primary is-light m-2">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("_footer") -%>
