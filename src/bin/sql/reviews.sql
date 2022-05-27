@@ -2,7 +2,7 @@ CREATE TABLE members(
     id serial,
     name character varying(50),
     email text,
-    password character varying(50),
+    password text,
     favorite_movies text[]
 );
 

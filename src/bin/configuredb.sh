@@ -9,6 +9,6 @@ echo "Configuring database: $database"
 dropdb -U node_user reviewsdb
 createdb -U node_user reviewsdb
 
-psql -U node_user reviewsdb < ./bin/sql/reviews.sql
+psql -U node_user reviewsdb < ./src/bin/sql/reviews.sql
 
 echo "$database configured"
